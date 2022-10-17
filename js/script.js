@@ -4,10 +4,16 @@ var currentWeatherData
 var weatherData = []
 $('#submitCityInput').on('click', function() {
   console.log("click!")
+  resetData();
   userInputCity = $('#cityInput').val();
   console.log(userInputCity)
   pullCoordinates()
 })
+function resetData() {
+  $('section').empty();
+  userInputCity=""
+  currentWeatherData=""
+}
 
 function pullCoordinates() {
   var requestUrlLocation = 'https://api.openweathermap.org/data/2.5/weather?q='+userInputCity+'&appid=9d7ebf8b022f99c1559d4339ab5c60ee'
@@ -33,6 +39,7 @@ function pullWeather(longitude, latitude) {
       console.log(data)
       var currentWeatherData = {
           weather: data.current.weather[0].main,
+          icon: data.current.weather[0].icon,
           temp: data.current.temp,
           wind: data.current.wind_speed,
           humidity: data.current.humidity,
@@ -43,6 +50,7 @@ function pullWeather(longitude, latitude) {
     for(var i = 0; i < 5; i++) {
         var futureWeatherData = {
             weather: data.daily[i].weather[0].main,
+            icon: data.daily[i].weather[0].icon,
             temp: data.daily[i].temp,
             wind: data.daily[i].wind_speed,
             humidity: data.daily[i].humidity,
@@ -58,10 +66,30 @@ function displayData() {
   var divEl = $('<div>')
   .addClass("col border mb-3")
   .append($('<h2>').text(userInputCity),
-  $('<h2>').text(weatherData[0].temp),
-  $('<h2>').text(weatherData[0].wind_speed),
-  $('<h2>').text(weatherData[0].humidity),
-  $('<h2>').text(weatherData[0].uvindex),
+      "<img src=http://openweathermap.org/img/wn/"+weatherData[0].icon+"@2x.png>",
+      $('<h2>').text("Current Temperature: " + weatherData[0].temp),
+      $('<h2>').text("Wind Speed: " + weatherData[0].wind + " MPH"),
+      $('<h2>').text("Humidity: " + weatherData[0].humidity),
+      $('<h2>').text("UV Index: " + weatherData[0].uvindex),
   )
-  $('section').append(divEl)
+  $('section').append(divEl);
+  var divEl1 = $('<div>').addClass("row gap-3")
+  console.log(weatherData[1].temp)
+  for (var i = 1; i <= 5; i++) {
+      divEl1.append($('<div>').addClass("col bg-primary")
+      .append("<img src=http://openweathermap.org/img/wn/"+weatherData[i].icon+".png>",
+      $('<h4>').text("Temp min: " + weatherData[i].temp.min),
+      $('<h4>').text("Temp max: " + weatherData[i].temp.max),
+      $('<h4>').text("Wind: " + weatherData[i].wind + " MPH"),
+      $('<h4>').text("Humidity: " + weatherData[i].humidity + " %"))
+      )
+  }
+  $('section').append(divEl1);
 }
+
+
+
+
+
+//if weather == cloudy
+//http://openweathermap.org/img/wn/10d@03d.png
