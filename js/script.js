@@ -2,7 +2,8 @@ var userInputCity
 var currentWeatherData
 
 var weatherData = []
-$('#submitCityInput').on('click', function() {
+$('#submitCityInput').on('click', function(event) {
+  event.preventDefault()
   console.log("click!")
   resetData();
   userInputCity = $('#cityInput').val();
@@ -78,10 +79,10 @@ function displayData() {
   for (var i = 1; i <= 5; i++) {
       divEl1.append($('<div>').addClass("col bg-primary")
       .append("<img src=http://openweathermap.org/img/wn/"+weatherData[i].icon+".png>",
-      $('<h4>').text("Temp min: " + weatherData[i].temp.min),
-      $('<h4>').text("Temp max: " + weatherData[i].temp.max),
-      $('<h4>').text("Wind: " + weatherData[i].wind + " MPH"),
-      $('<h4>').text("Humidity: " + weatherData[i].humidity + " %"))
+      $('<h5>').text("Temp min: " + weatherData[i].temp.min),
+      $('<h5>').text("Temp max: " + weatherData[i].temp.max),
+      $('<h5>').text("Wind: " + weatherData[i].wind + " MPH"),
+      $('<h5>').text("Humidity: " + weatherData[i].humidity + " %"))
       )
   }
   $('section').append(divEl1);
