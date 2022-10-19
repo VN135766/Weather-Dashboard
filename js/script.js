@@ -4,12 +4,16 @@ var currentWeatherData
 var weatherData = []
 $('#submitCityInput').on('click', function(event) {
   event.preventDefault()
-  console.log("click!")
+  console.log("click!");
   resetData();
   userInputCity = $('#cityInput').val();
   console.log(userInputCity)
+  addPreviousSearchButton();
   pullCoordinates()
 })
+function addPreviousSearchButton() {
+  $('#previousSearchList').append($('<button>').addClass("btn btn-primary").text(userInputCity))
+}
 function resetData() {
   $('section').empty();
   userInputCity=""
@@ -87,10 +91,3 @@ function displayData() {
   }
   $('section').append(divEl1);
 }
-
-
-
-
-
-//if weather == cloudy
-//http://openweathermap.org/img/wn/10d@03d.png
