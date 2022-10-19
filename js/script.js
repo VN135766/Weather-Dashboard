@@ -20,9 +20,7 @@ function addPreviousSearchButton() {
       $('<button>').addClass("btn btn-outline-danger").attr('id','delete-button').text("Delete")
   )
 )
-$('#previous-search').on('click', '#delete-button' ,function(event) {
-  $(event.target).parent().remove()
-})
+
 }
 function resetData() {
   $('section').empty();
@@ -30,7 +28,9 @@ function resetData() {
   weatherData= []
   currentWeatherData=""
 }
-
+$('#previous-search').on('click', '#delete-button' ,function(event) {
+  $(event.target).parent().remove()
+})
 function pullCoordinates() {
   var requestUrlLocation = 'https://api.openweathermap.org/data/2.5/weather?q='+userInputCity+'&appid=9d7ebf8b022f99c1559d4339ab5c60ee'
     fetch(requestUrlLocation)
