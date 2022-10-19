@@ -6,19 +6,23 @@ $('#submitCityInput').on('click', function(event) {
   event.preventDefault()
 
   resetData();
-  console.log(userInputCity)
+
   userInputCity = $('#cityInput').val();
-  console.log(userInputCity)
-  addPreviousSearchButton();
-  pullCoordinates()
+  pullCoordinates();
 })
 function addPreviousSearchButton() {
   var divEl = $('<div>').addClass("hstack gap-3").attr('id','previous-search').on('click','#delete-button',function(event) {
+    event.preventDefault()
     $(event.target).parent().remove()
+  }).on('click',"[data-value]",function(event) {
+    event.preventDefault();
+    resetData();
+    userInputCity = $(event.target).attr("data-value");
+    pullCoordinates();
 })
 $('#previousSearchList').append(divEl
   .append(
-      $('<button>').addClass("btn btn-primary container-fluid").text(userInputCity),
+    $('<button>').addClass("btn btn-primary container-fluid").attr("data-value", userInputCity).text(userInputCity),
       $('<div>').addClass("vr"),
       $('<button>').addClass("btn btn-outline-danger").attr('id','delete-button').text("Delete")
   )
@@ -36,6 +40,10 @@ function pullCoordinates() {
   var requestUrlLocation = 'https://api.openweathermap.org/data/2.5/weather?q='+userInputCity+'&appid=9d7ebf8b022f99c1559d4339ab5c60ee'
     fetch(requestUrlLocation)
     .then(function(response) {
+      if (response.status !== 200) {
+        alert(userInputCity + " is not a valid city name.  Please enter a valid city name.");
+        return
+    }
         return response.json()
     }).then(function(data) {
         console.log(data);
@@ -76,6 +84,7 @@ function pullWeather(longitude, latitude) {
     }
     console.log(weatherData)
     displayData()
+    addPreviousSearchButton();
 }) 
 }
 // var sectionEl = ('section')
