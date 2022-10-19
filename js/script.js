@@ -1,11 +1,12 @@
 var userInputCity
-var currentWeatherData
+
 
 var weatherData = []
 $('#submitCityInput').on('click', function(event) {
   event.preventDefault()
-  console.log("click!");
+
   resetData();
+  console.log(userInputCity)
   userInputCity = $('#cityInput').val();
   console.log(userInputCity)
   addPreviousSearchButton();
@@ -25,7 +26,8 @@ $('#previous-search').on('click', '#delete-button' ,function(event) {
 }
 function resetData() {
   $('section').empty();
-  userInputCity=""
+  userInputCity="";
+  weatherData= []
   currentWeatherData=""
 }
 
