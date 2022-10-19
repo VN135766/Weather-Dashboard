@@ -12,7 +12,16 @@ $('#submitCityInput').on('click', function(event) {
   pullCoordinates()
 })
 function addPreviousSearchButton() {
-  $('#previousSearchList').append($('<button>').addClass("btn btn-primary").text(userInputCity))
+  $('#previousSearchList').append($('<div>').addClass("hstack gap-3").attr('id','previous-search')
+  .append(
+      $('<button>').addClass("btn btn-primary container-fluid").text(userInputCity),
+      $('<div>').addClass("vr"),
+      $('<button>').addClass("btn btn-outline-danger").attr('id','delete-button').text("Delete")
+  )
+)
+$('#previous-search').on('click', '#delete-button' ,function(event) {
+  $(event.target).parent().remove()
+})
 }
 function resetData() {
   $('section').empty();
