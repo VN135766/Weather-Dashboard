@@ -133,8 +133,8 @@ function pullWeather(longitude, latitude) {
 // var sectionEl = ('section')
 function displayData() {
   var divEl = $("<div>")
-    .addClass("col border mb-3 rounded")
-    .append($('<div>').addClass("d-flex align-items-center gap-4").append($('<h2>').addClass('fw-bold').text(userInputCity),
+  .addClass("col border mb-3 rounded text-center text-lg-start px-3 mt-3 mt-lg-0")
+  .append($('<div>').addClass("d-flex align-items-center gap-4 justify-content-center justify-content-lg-start").append($('<h2>').addClass('fw-bolder').text(userInputCity),
     $('<h2>').addClass("fw-bold")
     .text(moment().format("MM/DD/YYYY")),
         "<img src=http://openweathermap.org/img/wn/"+weatherData[0].icon+"@2x.png>"),
@@ -146,12 +146,11 @@ function displayData() {
     );
   $("section").append(divEl);
   uvIndexColor()
-  var divEl1 = $('<div>').addClass("row gap-3 text-white")
+  var divEl1 = $('<div>').addClass("d-flex flex-wrap gap-3 text-white")
   console.log(weatherData[1].temp);
   for (var i = 1; i <= 5; i++) {
-    divEl1.append($('<div>').addClass("col bg-primary rounded")
-
-    .append($('<div>').addClass("d-flex align-items-end justify-content-between gap-4")
+    divEl1.append($('<div>').addClass("col p-3 bg-primary rounded")
+    .append($('<div>').addClass("d-flex align-items-end justify-content-between")
     .append($('<h4>').addClass('fw-bold').text(moment().add(i, 'd').format("MM/DD/YYYY")),
         "<img src=http://openweathermap.org/img/wn/"+weatherData[i].icon+".png>"),
         $('<hr>').addClass("py-1 custom-margins"),
