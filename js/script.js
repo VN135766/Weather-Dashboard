@@ -135,14 +135,17 @@ function displayData() {
   var divEl = $("<div>")
     .addClass("col border mb-3 rounded")
     .append($('<div>').addClass("d-flex align-items-center gap-4").append($('<h2>').addClass('fw-bold').text(userInputCity),
-        $('<h2>').addClass("fw-bold").text(moment().format("MM/DD/YYYY")),
+    $('<h2>').addClass("fw-bold")
+    .text(moment().format("MM/DD/YYYY")),
         "<img src=http://openweathermap.org/img/wn/"+weatherData[0].icon+"@2x.png>"),
         $('<h2>').text("Current Temperature: " + weatherData[0].temp+ " °F"),
       $("<h2>").text("Wind Speed: " + weatherData[0].wind + " MPH"),
       $('<h2>').text("Humidity: " + weatherData[0].humidity+ " %"),
-      $("<h2>").text("UV Index: " + weatherData[0].uvindex)
+      $('<div>').addClass('d-flex gap-2 align-items-center').append($('<h2>').text("UV Index: "), 
+            ($('<h2>')).attr('id','uvindex').text(weatherData[0].uvindex),)
     );
   $("section").append(divEl);
+  uvIndexColor()
   var divEl1 = $('<div>').addClass("row gap-3 text-white")
   console.log(weatherData[1].temp);
   for (var i = 1; i <= 5; i++) {
@@ -160,4 +163,18 @@ function displayData() {
     );
   }
   $("section").append(divEl1);
+}
+function uvIndexColor() {
+  if (weatherData[0].uvindex >= 0 && weatherData[0].uvindex < 2) {
+      $('#uvindex').attr('class','favorable')
+      console.log("favorable uvindex")
+  }
+  else if (weatherData[0].uvindex >= 2 && weatherData[0].uvindex < 5) {
+      $('#uvindex').attr('class','moderate')
+      console.log("moderate uvindex")
+  }
+  else if (weatherData[0].uvindex >= 5) {
+      $('#uvindex').attr('class','severe')
+      console.log("severe uvindex")
+  }
 }
