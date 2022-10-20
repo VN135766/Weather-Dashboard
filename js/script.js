@@ -8,6 +8,7 @@ $("#submitCityInput").on("click", function (event) {
   resetData();
 
   userInputCity = $("#cityInput").val();
+  $('#cityInput').val('')
   pullCoordinates();
 });
 function addPreviousSearchButton() {
