@@ -10,6 +10,17 @@ $("#submitCityInput").on("click", function (event) {
   userInputCity = $("#cityInput").val();
   pullCoordinates();
   $('#cityInput').val('');
+  if (userInputCity) {
+    userInputCity = userInputCity.charAt(0).toUpperCase() + userInputCity.substr(1)
+}
+if (userInputCity.includes(" ")) {
+    var userInputCityArray = userInputCity.split(" ")  //taken from https://www.freecodecamp.org/news/how-to-capitalize-words-in-javascript/
+    for(let i = 0; i < userInputCityArray.length; i++) {
+        userInputCityArray[i] = userInputCityArray[i][0].toUpperCase() 
+        + userInputCityArray[i].substr(1);
+    }
+    userInputCity = userInputCityArray.join(" ")
+}
 });
 function addPreviousSearchButton() {
   if (previousSearches.includes(userInputCity) === true) {
@@ -137,7 +148,7 @@ function displayData() {
   for (var i = 1; i <= 5; i++) {
     divEl1.append($('<div>').addClass("col bg-primary rounded")
 
-    .append($('<div>').addClass("d-flex align-items-center justify-content-between gap-4")
+    .append($('<div>').addClass("d-flex align-items-end justify-content-between gap-4")
     .append($('<h4>').addClass('fw-bold').text(moment().add(i, 'd').format("MM/DD/YYYY")),
         "<img src=http://openweathermap.org/img/wn/"+weatherData[i].icon+".png>"),
         $('<hr>').addClass("py-1 custom-margins"),
@@ -150,10 +161,3 @@ function displayData() {
   }
   $("section").append(divEl1);
 }
-
-console.log(moment().format("MM/DD/YYYY"))
-console.log(moment().add(1, 'd').format("MM/DD/YYYY"))
-console.log(moment().add(2, 'd').format("MM/DD/YYYY"))
-console.log(moment().add(3, 'd').format("MM/DD/YYYY"))
-console.log(moment().add(4, 'd').format("MM/DD/YYYY"))
-console.log(moment().add(5, 'd').format("MM/DD/YYYY"))
