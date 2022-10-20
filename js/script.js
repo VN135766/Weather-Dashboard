@@ -122,32 +122,37 @@ function pullWeather(longitude, latitude) {
 function displayData() {
   var divEl = $("<div>")
     .addClass("col border mb-3 rounded")
-    .append(
-      $("<h2>").text(userInputCity),
-      "<img src=http://openweathermap.org/img/wn/" +
-        weatherData[0].icon +
-        "@2x.png>",
-      $("<h2>").text("Current Temperature: " + weatherData[0].temp),
+    .append($('<div>').addClass("d-flex align-items-center gap-4").append($('<h2>').addClass('fw-bold').text(userInputCity),
+        $('<h2>').addClass("fw-bold").text(moment().format("MM/DD/YYYY")),
+        "<img src=http://openweathermap.org/img/wn/"+weatherData[0].icon+"@2x.png>"),
+        $('<h2>').text("Current Temperature: " + weatherData[0].temp+ " °F"),
       $("<h2>").text("Wind Speed: " + weatherData[0].wind + " MPH"),
-      $("<h2>").text("Humidity: " + weatherData[0].humidity),
+      $('<h2>').text("Humidity: " + weatherData[0].humidity+ " %"),
       $("<h2>").text("UV Index: " + weatherData[0].uvindex)
     );
   $("section").append(divEl);
-  var divEl1 = $("<div>").addClass("row gap-3");
+  var divEl1 = $('<div>').addClass("row gap-3 text-white")
   console.log(weatherData[1].temp);
   for (var i = 1; i <= 5; i++) {
     divEl1.append($('<div>').addClass("col bg-primary rounded")
 
-        .append(
-          "<img src=http://openweathermap.org/img/wn/" +
-            weatherData[i].icon +
-            ".png>",
-          $("<h5>").text("Temp min: " + weatherData[i].temp.min),
-          $("<h5>").text("Temp max: " + weatherData[i].temp.max),
-          $("<h5>").text("Wind: " + weatherData[i].wind + " MPH"),
-          $("<h5>").text("Humidity: " + weatherData[i].humidity + " %")
+    .append($('<div>').addClass("d-flex align-items-center justify-content-between gap-4")
+    .append($('<h4>').addClass('fw-bold').text(moment().add(i, 'd').format("MM/DD/YYYY")),
+        "<img src=http://openweathermap.org/img/wn/"+weatherData[i].icon+".png>"),
+        $('<hr>').addClass("py-1 custom-margins"),
+        $('<h5>').text("Temp min: " + weatherData[i].temp.min + " °F"),
+        $('<h5>').text("Temp max: " + weatherData[i].temp.max+ " °F"),
+        $('<h5>').text("Wind: " + weatherData[i].wind + " MPH"),
+        $('<h5>').text("Humidity: " + weatherData[i].humidity + " %")
         )
     );
   }
   $("section").append(divEl1);
 }
+
+console.log(moment().format("MM/DD/YYYY"))
+console.log(moment().add(1, 'd').format("MM/DD/YYYY"))
+console.log(moment().add(2, 'd').format("MM/DD/YYYY"))
+console.log(moment().add(3, 'd').format("MM/DD/YYYY"))
+console.log(moment().add(4, 'd').format("MM/DD/YYYY"))
+console.log(moment().add(5, 'd').format("MM/DD/YYYY"))
