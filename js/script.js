@@ -1,7 +1,9 @@
-var userInputCity
+var userInputCity;
+var previousSearches = [];
+var weatherData = [];
 
 
-var weatherData = []
+
 $('#submitCityInput').on('click', function(event) {
   event.preventDefault()
 
@@ -11,6 +13,10 @@ $('#submitCityInput').on('click', function(event) {
   pullCoordinates();
 })
 function addPreviousSearchButton() {
+  if (previousSearches.includes(userInputCity) === true) {
+    return;
+}
+previousSearches.push(userInputCity)
   var divEl = $('<div>').addClass("hstack gap-3").attr('id','previous-search').on('click','#delete-button',function(event) {
     event.preventDefault()
     $(event.target).parent().remove()
