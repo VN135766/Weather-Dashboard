@@ -8,8 +8,8 @@ $("#submitCityInput").on("click", function (event) {
   resetData();
 
   userInputCity = $("#cityInput").val();
-  $('#cityInput').val('')
   pullCoordinates();
+  $('#cityInput').val('');
 });
 function addPreviousSearchButton() {
   if (previousSearches.includes(userInputCity) === true) {
