@@ -15,11 +15,10 @@ crossorigin="anonymous">
     <header class="bg-primary bg-gradient text-center py-5 text-white mb-3 container-fluid d-grid">
         <h1>Weather Dashboard</h1>
 </header>
-<main>
-    <div class="container-fluid d-grid">
-        <div class="row">
-            <aside class="container col-lg-3 ">
-                <form>
+<main class="container-fluid d-grid">  
+    <div class="row">
+        <aside class="container col-lg-3 ">
+            <form>
                 <div>
                     <label for="cityInput" class="form-label  fs-2">Search for a City</label>
                     <input type="text" class="form-control" id="cityInput" placeholder="San Diego">
@@ -29,12 +28,9 @@ crossorigin="anonymous">
                 <hr>
                 <div class="vstack gap-2" id="previousSearchList"></div>
             </form>
-                        <!-- add location buttons here -->
-
-            </aside>
-            <section class="container-fluid col-lg-9 vstack"></section>
-
-        <!-- </div> -->
+            <!-- add location buttons here -->
+        </aside>
+        <section class="container col-lg-9 vstack"></section>
     </div>
 </main>
 </body>

@@ -39,12 +39,9 @@ function addPreviousSearchButton() {    //function appends previous search histo
       pullCoordinates();  //API call to city clicked
     });
     $('#previousSearchList').append(divEl   //appends buttons to search history
-    divEl.append(
-      $("<button>")
-        .addClass("btn btn-primary container-fluid")
-        .attr("id", "city-button")
-        .attr("data-value", userInputCity)
-        .text(userInputCity),
+    .append(
+      $('<button>').addClass("btn btn-primary container").attr('id','city-button').attr("data-value", userInputCity).text(userInputCity),
+
       $("<div>").addClass("vr"),
       $("<button>")
         .addClass("btn btn-outline-danger")
@@ -127,7 +124,7 @@ function pullWeather(longitude, latitude) {
 // var sectionEl = ('section')
 function displayData() {
   var divEl = $("<div>")
-  .addClass("col border mb-3 rounded text-center text-lg-start px-3 mt-3 mt-xl-0 container-fluid")
+  .addClass("col border mb-3 rounded text-center text-lg-start px-3 mt-3 mt-xl-0")
   .append($('<div>').addClass("d-flex align-items-center gap-4 justify-content-center justify-content-lg-start").append($('<h2>').addClass('fw-bolder').text(userInputCity),
     $('<h2>').addClass("fw-bold")
     .text(moment().format("MM/DD/YYYY")),
@@ -143,7 +140,7 @@ function displayData() {
   var divEl1 = $('<div>').addClass("d-flex flex-wrap gap-3 text-white")
   console.log(weatherData[1].temp);
   for (var i = 1; i <= 5; i++) {
-    divEl1.append($('<div>').addClass("col p-3 bg-primary container-fluid rounded")
+    divEl1.append($('<div>').addClass("col p-3 bg-primary rounded")
     .append($('<div>').addClass("d-flex align-items-end justify-content-between")
     .append($('<h4>').addClass('fw-bold').text(moment().add(i, 'd').format("MM/DD/YYYY")),
         "<img src=http://openweathermap.org/img/wn/"+weatherData[i].icon+".png>"),
