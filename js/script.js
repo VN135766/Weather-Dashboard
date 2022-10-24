@@ -1,5 +1,6 @@
 var userInputCity;          //stores users city input
-var previousSearches = [];  //search history
+var previousSearches = JSON.parse(localStorage.getItem("previousSearches")) || [];  //search history
+
 var weatherData = [];       //weather data API call results
 
 $('#submitCityInput').on('click', function(event) {     //form submission
@@ -20,6 +21,37 @@ $('#submitCityInput').on('click', function(event) {     //form submission
     userInputCity = userInputCityArray.join(" ")    //if input is more than 1 word, first letter of each word is made uppercase
   }
 });
+renderPreviousSearches()
+function renderPreviousSearches() {
+    if (previousSearches != []) {
+        console.log("there are saved searches")
+        for (var i = 0;i<previousSearches.length; i++) {
+            var previousSearchItem = previousSearches[i]
+            var divEl = $('<div>').addClass("hstack gap-3").attr('id','previous-search')
+            .on('click','#delete-button',function(event) { //DELETE BUTTON event delegation--adds event listener to button before appending
+                event.preventDefault()
+                $(event.target).parent().remove()
+                previousSearchItem = $(event.target).attr("data-value")  //utilizing data attribute storage
+                previousSearches.splice(previousSearches.indexOf(previousSearchItem),1)  //removes search from previousSearch array
+                console.log(previousSearches)
+                localStorage.setItem("previousSearches", JSON.stringify(previousSearches))
+            }).on('click',"#city-button",function(event) { //CITY BUTTON event delegation--adds event listener to button before appending
+                event.preventDefault();
+                resetData();        //clears vars so a new call can store new info
+                userInputCity = $(event.target).attr("data-value"); //utilizing data attribute storage
+                pullCoordinates();  //API call to city clicked
+            })
+            $('#previousSearchList').append(divEl   //appends buttons to search history
+                .append(
+                    $('<button>').addClass("btn btn-primary container").attr('id','city-button').attr("data-value", previousSearches[i]).text(previousSearches[i]),
+                    $('<div>').addClass("vr"),
+                    $('<button>').addClass("btn btn-outline-danger").attr('id','delete-button').attr("data-value", previousSearches[i]).text("Delete")
+                )
+            ) 
+        }
+    }
+}
+
 function addPreviousSearchButton() {    //function appends previous search history buttons to page
   if (previousSearches.includes(userInputCity) === true) {
     return;                         //prevents duplicates cities from being added to history
@@ -30,8 +62,9 @@ function addPreviousSearchButton() {    //function appends previous search histo
       event.preventDefault();
       $(event.target).parent().remove();
       userInputCity = $(event.target).attr("data-value")  //utilizing data attribute storage
-      previousSearches.splice(previousSearches.indexOf(userInputCity,1))  //removes search from previousSearch array
-  }).on('click',"#city-button",function(event) { //CITY BUTTON event delegation--adds event listener to button before appending
+      previousSearches.splice(previousSearches.indexOf(userInputCity),1)  //removes search from previousSearch array
+      console.log(previousSearches)
+      localStorage.setItem("previousSearches", JSON.stringify(previousSearches))  }).on('click',"#city-button",function(event) { //CITY BUTTON event delegation--adds event listener to button before appending
       event.preventDefault();
       console.log("click!");
       resetData();        //clears vars so a new call can store new info
@@ -50,6 +83,8 @@ function addPreviousSearchButton() {    //function appends previous search histo
         .text("Delete")
     )
   );
+  localStorage.setItem("previousSearches", JSON.stringify(previousSearches))
+  console.log(previousSearches)
 }
 function resetData() {
   $('section').empty();   //removes all previous weather display
