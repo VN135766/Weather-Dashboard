@@ -1,49 +1,44 @@
-var userInputCity;
-var previousSearches = [];
-var weatherData = [];
+var userInputCity;          //stores users city input
+var previousSearches = [];  //search history
+var weatherData = [];       //weather data API call results
 
-$("#submitCityInput").on("click", function (event) {
+$('#submitCityInput').on('click', function(event) {     //form submission
   event.preventDefault();
 
-  resetData();
-
-  userInputCity = $("#cityInput").val();
+  resetData();    //clears userInputCity and weather vars
+  userInputCity = $('#cityInput').val();      //returns value of what user inputted to variable
   pullCoordinates();
   $('#cityInput').val('');
   if (userInputCity) {
-    userInputCity = userInputCity.charAt(0).toUpperCase() + userInputCity.substr(1)
-}
-if (userInputCity.includes(" ")) {
-  var userInputCityArray = userInputCity.split(" ")
+    userInputCity = userInputCity.charAt(0).toUpperCase() + userInputCity.substr(1)     //converts first letter to uppercase
+  }
+  if (userInputCity.includes(" ")) {    var userInputCityArray = userInputCity.split(" ")
   for(let i = 0; i < userInputCityArray.length; i++) {
         userInputCityArray[i] = userInputCityArray[i][0].toUpperCase() 
         + userInputCityArray[i].substr(1);
     }
-    userInputCity = userInputCityArray.join(" ")
-}
-});
-function addPreviousSearchButton() {
-  if (previousSearches.includes(userInputCity) === true) {
-    return;
+    userInputCity = userInputCityArray.join(" ")    //if input is more than 1 word, first letter of each word is made uppercase
   }
-  previousSearches.push(userInputCity);
-  var divEl = $("<div>")
-    .addClass("hstack gap-3")
-    .attr("id", "previous-search")
-    .on("click", "#delete-button", function (event) {
+});
+function addPreviousSearchButton() {    //function appends previous search history buttons to page
+  if (previousSearches.includes(userInputCity) === true) {
+    return;                         //prevents duplicates cities from being added to history
+  }
+  previousSearches.push(userInputCity)//if search is new, then add value to previousSearch array
+    var divEl = $('<div>').addClass("hstack gap-3").attr('id','previous-search')
+    .on('click','#delete-button',function(event) { //DELETE BUTTON event delegation--adds event listener to button before appending
       event.preventDefault();
       $(event.target).parent().remove();
-      userInputCity = $(event.target).attr("data-value");
-      previousSearches.splice(previousSearches.indexOf(userInputCity, 1));
-    })
-    .on("click", "#city-button", function (event) {
+      userInputCity = $(event.target).attr("data-value")  //utilizing data attribute storage
+      previousSearches.splice(previousSearches.indexOf(userInputCity,1))  //removes search from previousSearch array
+  }).on('click',"#city-button",function(event) { //CITY BUTTON event delegation--adds event listener to button before appending
       event.preventDefault();
       console.log("click!");
-      resetData();
-      userInputCity = $(event.target).attr("data-value");
-      pullCoordinates();
+      resetData();        //clears vars so a new call can store new info
+      userInputCity = $(event.target).attr("data-value"); //utilizing data attribute storage
+      pullCoordinates();  //API call to city clicked
     });
-  $("#previousSearchList").append(
+    $('#previousSearchList').append(divEl   //appends buttons to search history
     divEl.append(
       $("<button>")
         .addClass("btn btn-primary container-fluid")
@@ -60,17 +55,16 @@ function addPreviousSearchButton() {
   );
 }
 function resetData() {
-  $("section").empty();
+  $('section').empty();   //removes all previous weather display
+
   userInputCity = "";
   weatherData = [];
   currentWeatherData = "";
 }
 
 function pullCoordinates() {
-  var requestUrlLocation =
-    "https://api.openweathermap.org/data/2.5/weather?q=" +
-    userInputCity +
-    "&appid=9d7ebf8b022f99c1559d4339ab5c60ee";
+  var requestUrlLocation = 'https://api.openweathermap.org/data/2.5/weather?q='+userInputCity+'&appid=9d7ebf8b022f99c1559d4339ab5c60ee'   //includes city input from user and api key -- fetch data to get latitude and longitude of input location 
+
   fetch(requestUrlLocation)
     .then(function (response) {
       if (response.status !== 200) {
