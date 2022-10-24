@@ -6,16 +6,19 @@
     background-color:#299501;
     padding: 0 3% 0 3%;
     border-radius: 5px;
+    color:white;
 }
 
 .moderate {
     background-color: #F2CB05;
     padding: 0 3% 0 3%;
     border-radius: 5px;
+    color:white;
 }
 
 .severe {
     background-color: #D9042B;
     padding: 0 3% 0 3%;
+    color:white;
     border-radius: 5px;
 }

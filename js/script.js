@@ -135,8 +135,8 @@ function displayData() {
         $('<h2>').text("Current Temperature: " + weatherData[0].temp+ " °F"),
       $("<h2>").text("Wind Speed: " + weatherData[0].wind + " MPH"),
       $('<h2>').text("Humidity: " + weatherData[0].humidity+ " %"),
-      $('<div>').addClass('d-flex gap-2 align-items-center').append($('<h2>').text("UV Index: "), 
-            ($('<h2>')).attr('id','uvindex').text(weatherData[0].uvindex),)
+      $('<div>').addClass('d-flex justify-content-center justify-content-lg-start gap-2 align-items-center').append($('<h2>').text("UV Index: "), 
+      ($('<h2>')).attr('id','uvindex').text(weatherData[0].uvindex),)
     );
   $("section").append(divEl);
   uvIndexColor()
