@@ -185,6 +185,7 @@ function displayData() {
     );
   $("section").append(divEl);
   uvIndexColor()
+  $('section').append($('<h2>').addClass("text-center text-lg-start").text("5 Day Forecast"))
   var divEl1 = $('<div>').addClass("d-flex flex-wrap gap-3 text-white")
   console.log(weatherData[1].temp);
   for (var i = 1; i <= 5; i++) {
