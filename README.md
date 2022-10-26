@@ -15,13 +15,19 @@
 - ### [URL to Deployed Application]()
 - ### [URL to Github Repository]()
 ## Technologies
-- Server Side APIs
-- jQuery
-- Bootstrap
-- MomentJS
-- Local Storage
-- HTML5
-- CSS3
+### Languages and Libraries
+![JavaScript Logo](./assets/images/javascript.png)
+![HTML5 Logo](./assets/images/html5.png)
+![CSS3 Logo](./assets/images/css3.png)
+![jQuery Logo](./assets/images/jquery-logo.png)
+
+### 3rd Party APIs
+[![Bootstrap Logo](./assets/images/bootstrap-logo.png)](https://getbootstrap.com/)
+[![OpenWeatherMap Logo](./assets/images/open-weather-map-logo.png)](https://openweathermap.org/api)
+[![MomentJS Logo](./assets/images/momentJS-logo.png)](https://momentjs.com/)
+
+
+### Miscellaneou Technologies
 
 ## Screenshot of Webpage
 ![desktop screenshot of application](./assets/images/application-screenshot-desktop-view.jpg/)
