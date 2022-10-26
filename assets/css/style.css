@@ -23,8 +23,10 @@
     border-radius: 5px;
 }
 
-.custom-container-fluid {
-    padding-right: 0;
-    padding-left: 0;
-    margin-right:auto;
-    margin-left:auto;
+@media screen and (min-width: 992px) {
+    .custom-container-fluid {
+        padding-right: 0;
+        padding-left: 0;
+        margin-right:auto;
+        margin-left:auto;
+    }
