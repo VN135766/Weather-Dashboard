@@ -10,6 +10,19 @@ $('#submitCityInput').on('click', function(event) {     //form submission
   userInputCity = $('#cityInput').val();      //returns value of what user inputted to variable
   pullCoordinates();
   $('#cityInput').val('');
+  submitCity()
+})
+
+displayForPageLoad();
+function displayForPageLoad() {
+    if(previousSearches.length >= 1) {
+    renderPreviousSearches()
+    userInputCity = previousSearches[0]
+    submitCity()
+    }
+}
+
+function submitCity() {
   if (userInputCity) {
     userInputCity = userInputCity.charAt(0).toUpperCase() + userInputCity.substr(1)     //converts first letter to uppercase
   }
